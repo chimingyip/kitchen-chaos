@@ -70,7 +70,7 @@ public class Player : MonoBehaviour
             {
                 if (clearCounter != selectedCounter)
                 {
-                    SetSelectedCounter(null);
+                    SetSelectedCounter(clearCounter);
                 } 
             } else
             {
