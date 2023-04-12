@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using Unity.Netcode;
+using System.Collections.Generic;
 
 public class Player : NetworkBehaviour, IKitchenObjectParent
 {
@@ -25,6 +26,7 @@ public class Player : NetworkBehaviour, IKitchenObjectParent
     [SerializeField] private LayerMask countersLayerMask;
     [SerializeField] private LayerMask collisionsLayerMask;
     [SerializeField] private Transform kitchenObjectHoldPoint;
+    [SerializeField] private List<Vector3> spawnPositionList;
 
     private bool isWalking;
     private Vector3 lastInteractDir;
@@ -43,6 +45,8 @@ public class Player : NetworkBehaviour, IKitchenObjectParent
         {
             LocalInstance = this;
         }
+
+        transform.position = spawnPositionList[(int)OwnerClientId];
 
         OnAnyPlayerSpawned?.Invoke(this, EventArgs.Empty);
     }
