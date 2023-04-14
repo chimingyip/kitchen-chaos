@@ -10,6 +10,7 @@ public class _GameManager : MonoBehaviour
     public event EventHandler OnStateChanged;
     public event EventHandler OnGamePaused;
     public event EventHandler OnGameUnpaused;
+    public event EventHandler OnLocalPlayerReadyChanged;
 
     private enum State
     {
@@ -20,6 +21,7 @@ public class _GameManager : MonoBehaviour
     }
 
     private State state;
+    private bool isLocalPlayerReady;
     private float countdownToStartTimer = 3f;
     private float gamePlayingTimer;
     private float gamePlayingTimerMax = 300f;
@@ -43,8 +45,8 @@ public class _GameManager : MonoBehaviour
     {
         if (state == State.WaitingToStart)
         {
-            state = State.CountdownToStart;
-            OnStateChanged?.Invoke(this, EventArgs.Empty);
+            isLocalPlayerReady = true;
+            OnLocalPlayerReadyChanged?.Invoke(this, EventArgs.Empty);
         }
     }
 
@@ -99,6 +101,10 @@ public class _GameManager : MonoBehaviour
     public bool IsGameOver()
     {
         return state == State.GameOver;
+    }
+
+    public bool IsLocalPlayerReady() {
+        return isLocalPlayerReady;
     }
 
     public float GetGamePlayingTimerNormalized()
