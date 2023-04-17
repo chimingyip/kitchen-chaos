@@ -74,7 +74,7 @@ public class OptionsUI : MonoBehaviour
 
     private void Start()
     {
-        _GameManager.Instance.OnGameUnpaused += GameManager_OnGameUnpaused;
+        _GameManager.Instance.OnLocalGameUnpaused += GameManager_OnGameUnpaused;
 
         UpdateVisual();
         Hide();
